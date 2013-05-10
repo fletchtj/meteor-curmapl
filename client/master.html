@@ -1,0 +1,44 @@
+<head>
+  <title>curmapl</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+</head>
+
+<body>
+	{{>header}}
+    <div class="container">
+  	  {{renderPage}}
+    </div>
+	{{>footer}}
+</body>
+
+<template name="home">
+  <h1>Hello World!</h1>
+  <p>{{greeting}}</p>
+  <p><input type="button" class="btn btn-success" value="RWFM? {{clickCount}}" /></p>
+  <p>Would you like to see a <a href="/maps/red">Red map</a>?</p>
+  <p>Would you like to see <a href="/maps/1">Map 1</a>?</p>
+  {{#if currentUser}}
+  	<p>Would you like to see <a href="/maps/2">Map 2</a>?</p>
+  {{/if}}
+</template>
+
+<template name="map">
+	<h2>Congrats! You made it to map #{{mapNumber}}.</h2>
+	<p>Time to head back to the <a href="/">homepage</a></p>
+</template>
+
+<template name="redMap">
+	<h2>Congrats! You made it to the <strong>RED</strong> map.</h2>
+	<p>Time to head back to the <a href="/">homepage</a></p>
+</template>
+
+<template name="signin">
+	<h2>Please sign in to view this page.</h2>
+</template>
+
+<template name="loading">
+	<div style="clear:both;">
+		<p class="text-center" style="color:#888;"><i class="icon-spinner icon-spin icon-4x"></i><br/>Loading....Please Wait</span></p>
+	</div>
+</template>

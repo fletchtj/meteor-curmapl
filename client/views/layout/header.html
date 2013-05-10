@@ -1,0 +1,21 @@
+<template name="header">
+		<div id="header" class="navbar">
+			<div class="navbar-inner">
+				<ul class="nav pull-right">
+					{{>userInfo}}
+				</ul>
+			</div>
+		</div>
+</template>
+
+<template name="userInfo">
+	{{#if currentUser}}
+		{{>accountDropdown}}
+	{{else}}
+		{{>userLoggedOut}}
+	{{/if}}
+</template>
+
+<template name="userLoggedOut">
+	<li><span class="navbar-text">{{loginButtons align="right"}}</span></li>
+</template>
