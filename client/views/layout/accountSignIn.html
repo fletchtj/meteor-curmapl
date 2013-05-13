@@ -1,0 +1,26 @@
+<template name="accountSignIn">
+	<li class="dropdown">
+		<a data-toggle="dropdown" class="dropdown-toggle" href="javascript:">Sign In <i class="caret"></i></a>
+		<ul class="dropdown-menu dropdown-user-account">
+			<li>
+				<div style="margin:10px 10px 0 10px;">
+					<div id="errMessage" class="alert alert-error" style="display:none;"></div>
+					<label for="userName">Username:</label>
+						<input type="text" name="userName" id="userName" value="" placeholder="Username or e-mail"/></p>
+					<label for="userPass">Password:</label>
+						<input type="password" name="userPass" id="userPass" value=""/>
+				</div>
+			</li>
+			<li class="account-footer">
+				<div class="row-fluid">
+					<div class="span8">
+						<a class="btn btn-small btn-link" href="javascript:">Forgot Password?</a>
+					</div>
+					<div class="span4">
+						<a href="javascript:" id="btnLogin" class="btn btn-small btn-danger pull-right">Sign In</a>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</li>
+</template>
