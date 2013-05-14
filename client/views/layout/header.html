@@ -10,12 +10,9 @@
 
 <template name="userInfo">
 	{{#if currentUser}}
-		{{>accountDropdown}}
+		{{>accountLoggedIn}}
 	{{else}}
-		{{>accountSignIn}}
+		{{>accountLoggedOut}}
 	{{/if}}
 </template>
 
-<template name="userLoggedOut">
-	<li><span class="navbar-text">{{loginButtons align="right"}}</span></li>
-</template>
