@@ -1,15 +1,15 @@
-/*
+/* Organizations
 	name:
 */
 Organizations = new Meteor.Collection("organizations");
 
-/*
+/* Sites
 	orgid: ID
 	name:
 */
 Sites = new Meteor.Collection("sites");
 
-/*
+/* Courses
 	orgid: ID
 	siteid: ID
 	name:
@@ -18,7 +18,7 @@ Sites = new Meteor.Collection("sites");
 */
 Courses = new Meteor.Collection("courses");
 
-/*
+/* MapTemplates
 	orgid: ID
 	name:
 	type: 
@@ -33,7 +33,7 @@ Courses = new Meteor.Collection("courses");
 */
 MapTemplates = new Meteor.Collection("mapTemplates");
 
-/*
+/* Maps
 	orgid: ID
 	name:
 	courseid: ID
@@ -42,7 +42,7 @@ MapTemplates = new Meteor.Collection("mapTemplates");
 */
 Maps = new Meteor.Collection("maps");
 
-/*
+/* Units
 	orgid: ID
 	mapid: ID
 	name: 

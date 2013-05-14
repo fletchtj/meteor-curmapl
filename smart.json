@@ -5,6 +5,7 @@
   },
   "packages": {
     "router": {},
-    "font-awesome": {}
+    "font-awesome": {},
+    "datatables": {}
   }
 }

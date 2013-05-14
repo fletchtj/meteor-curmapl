@@ -1,5 +1,5 @@
 <head>
-  <title>curmapl</title>
+  <title>TIES Curriculum</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 </head>
@@ -13,14 +13,68 @@
 </body>
 
 <template name="home">
-  <h1>Hello World!</h1>
-  <p>{{greeting}}</p>
-  <p><input type="button" class="btn btn-success" value="RWFM? {{clickCount}}" /></p>
-  <p>Would you like to see a <a href="/maps/red">Red map</a>?</p>
-  <p>Would you like to see <a href="/maps/1">Map 1</a>?</p>
-  {{#if currentUser}}
-  	<p>Would you like to see <a href="/maps/2">Map 2</a>?</p>
-  {{/if}}
+	<div class="row">
+		<div class="span3">
+			<div class="well sidenav affix">
+              <ul class="nav nav-list">
+                <li class="nav-header">Consensus Maps</li>
+                <li><a href="javascript:"><i class="icon-angle-right"></i>Home</a></li>
+                <li><a href="/maps/red"><i class="icon-angle-right"></i>Red Map</a></li>
+                <li><a href="/maps/1"><i class="icon-angle-right"></i>Map 1</a></li>
+				{{#if currentUser}}
+				<li class="nav-header">Diary Maps</li>
+				<li><a href="/maps/2"><i class="icon-angle-right"></i>Map 2</a></li>
+				{{/if}}
+                <li class="divider"></li>
+                <li><a href="javascript:"><i class="icon-angle-right"></i>Help</a></li>
+              </ul>
+            </div>
+		</div>
+		<div class="span9">
+			<table id="example" class="table table-striped table-bordered">
+				<thead>
+					<tr>
+						<th>Map</th>
+						<th>Owner</th>
+						<th>Last modified</th>
+					</tr>
+				</thead>
+				<tbody>
+					{{#each myMaps}}
+					<tr class="gradeA">
+						<td><a href="/maps/10">{{this.name}}</td>
+						<td>{{this.owner}}</td>
+						<td>{{this.lastMod}}</td>
+					</tr>
+					{{/each}}
+				</tbody>
+			</table>
+			
+			<h2>{{orgName}}</h2>
+			<table id="courses" class="table table-striped table-bordered">
+				<thead>
+					<tr>
+						<th>Course</th>
+						<th>Site</th>
+					</tr>
+				</thead>
+				<tbody>
+					{{#each orgCourses}}
+					<tr class="gradeA">
+						<td><a href="/maps/10">{{this.name}}</td>
+						<td>{{this.siteid}}</td>
+					</tr>
+					{{/each}}
+				</tbody>
+			</table>
+			
+			<div style="margin-top:20px;">
+				<h3>Some instructions...</h3>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eleifend tortor vitae enim dapibus pulvinar. Donec ante nisi, mattis nec porta vel, aliquam sagittis odio. Nunc tincidunt sapien quis metus euismod pharetra. Sed in velit in tortor dignissim imperdiet. Quisque ut pretium orci. Fusce lacus nibh, commodo sit amet auctor nec, adipiscing sed augue. Donec placerat facilisis turpis sed porttitor. Phasellus sit amet massa aliquet tellus semper euismod quis in eros. Nullam vitae elit lorem, et ultricies quam. Praesent eget nisi diam, et ornare orci. Duis ultricies commodo consectetur. Nunc pharetra metus non lorem cursus et tristique dui luctus. Mauris auctor suscipit mollis. Fusce facilisis vestibulum ante, nec feugiat mauris convallis facilisis.</p>
+				<p>Proin eu libero gravida erat rhoncus tempus. Nunc ac lorem odio. Vivamus nunc lorem, mollis vitae viverra vitae, pretium ultrices nunc. Nunc vel commodo massa. Integer rhoncus elit sed diam iaculis ac ullamcorper lectus rhoncus. Vestibulum pretium nibh vel odio adipiscing convallis. Ut tincidunt, urna eu tincidunt interdum, lorem ante pretium nunc, quis luctus justo eros non felis. Mauris posuere ultrices nulla quis egestas. Sed eget libero eget nisl consequat gravida id congue felis. Vestibulum id nunc ut dui pharetra feugiat quis id tellus. Phasellus urna lacus, aliquet nec rutrum non, mollis a risus. Fusce semper porta massa, quis pretium lectus molestie eget. Sed nec lacus in turpis pretium convallis vitae sit amet tortor.</p>
+			</div>
+		</div>
+	</div>
 </template>
 
 <template name="map">

@@ -1,9 +1,12 @@
 <template name="header">
-		<div id="header" class="navbar">
+		<div id="header" class="navbar navbar-fixed-top">
 			<div class="navbar-inner">
-				<ul class="nav pull-right">
-					{{>userInfo}}
-				</ul>
+				<div class="container">
+					<a href="/" class="brand">TIES Curriculum</a>
+					<ul class="nav pull-right">
+						{{>userInfo}}
+					</ul>
+				</div>
 			</div>
 		</div>
 </template>

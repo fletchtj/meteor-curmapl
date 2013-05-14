@@ -1,5 +1,5 @@
 /* CSS declarations go here */
-body {background:#efefef;}
+body {background:#efefef; padding-top:60px;}
 .dropdown-menu.dropdown-user-account {width:365px; padding-bottom:0;}
 .navbar .pull-right > li > .dropdown-menu:after {right:18px;}
 .navbar .pull-right > li > .dropdown-menu:before {right:17px;}
@@ -38,7 +38,7 @@ body {background:#efefef;}
     clear:both;
     border-top:1px solid #cccccc;
     background-color:#ededed;
-    margin:15px 0px -4px 0px;
+    margin:15px 0px 0px 0px;
     -webkit-border-radius: 0px 0px 4px 4px;
     -moz-border-radius: 0px 0px 4px 4px;
     border-radius: 0px 0px 4px 4px;
@@ -100,3 +100,21 @@ body {background:#efefef;}
   top: -6px;
   width: 0px;
 }
+
+/* Side Navigation */
+.sidenav.affix {width:228px;padding: 8px 0;top:60px;}
+@media (min-width: 1200px) {
+	.sidenav.affix {width:258px;}
+}
+@media (max-width: 979px) and (min-width: 768px) {
+	.sidenav.affix {width:166px;}
+}
+@media (max-width: 979px) {
+	body{padding-top:0;}
+}
+@media (max-width: 767px) {
+	.sidenav.affix {position:static;width:auto;}
+}
+
+table.dataTable td {padding:8px 10px;}
+table.table thead .sorting, table.table thead .sorting_asc, table.table thead .sorting_desc {background-color:#f5f5f5;}

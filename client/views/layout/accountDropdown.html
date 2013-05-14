@@ -1,14 +1,12 @@
 <template name="accountLoggedOut">
 	<li class="dropdown">
 		<a data-toggle="dropdown" class="dropdown-toggle" href="javascript:">Sign In <i class="caret"></i></a>
-		<ul class="dropdown-menu dropdown-user-account">
-			<li>
-				<div style="margin:10px 10px 0 10px;">
-					<div id="errMessage" class="alert alert-error" style="display:none;"></div>
-					<label for="userName">Username:</label>
-						<input type="text" name="userName" id="userName" value="" placeholder="Username or e-mail"/></p>
-					<label for="userPass">Password:</label>
-						<input type="password" name="userPass" id="userPass" value=""/>
+		<ul class="dropdown-menu dropdown-user-account" style="width:300px;">
+			<li style="padding:10px 20px 0 20px;">
+				<div class="row-fluid">
+					<div id="errMessage" class="alert alert-error" style="display:none; margin-bottom:10px;"></div>
+					<input type="text" name="userName" id="userName" value="" placeholder="E-mail address" class="span12" style="margin-top:10px;"/>
+					<input type="password" name="userPass" id="userPass" value="" placeholder="Password" class="span12" />
 				</div>
 			</li>
 			<li class="account-footer">
@@ -40,10 +38,8 @@
 			</li>
 			<li class="account-footer">
 				<div class="row-fluid">
-					<div class="span8">
-						<a class="btn btn-small btn-primary dropdown-toggle" href="javascript:">Account Settings</a>
-					</div>
-					<div class="span4">
+					<div class="span12">
+						<a class="btn btn-small btn-primary dropdown-toggle pull-left" href="javascript:">Account Settings</a>
 						<a href="javascript:" id="btnLogout" class="btn btn-small btn-danger pull-right">Logout</a>
 					</div>
 				</div>
