@@ -1,13 +1,16 @@
 //always get organizations
-Meteor.subscribe("organizations");
-//always get sites
-Meteor.subscribe("sites", Session.get("orgId"));
-//always get courses
-Meteor.subscribe("courses", Session.get("orgId"));
-
-Meteor.startup(function() {
-	Session.set("orgId", Organizations.findOne({name:"Demo Organization"})["_id"]);
+Meteor.subscribe("organizations", function(){
+	Session.set("orgId", Organizations.findOne({name:"Demo Organization"})._id);
 });
+
+Deps.autorun(function() {
+	//always get sites
+	Meteor.subscribe("sites", Session.get("orgId"));
+	//always get courses
+	Meteor.subscribe("courses", Session.get("orgId"));
+	
+});
+
 
 Template.home.helpers({
 	clickCount: function() {

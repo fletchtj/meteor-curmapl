@@ -3,7 +3,11 @@
 ////////////////////
 
 Meteor.startup(function(){
-
+	
+	if (Meteor.users.find().count() === 0) {
+		Accounts.createUser({email: "user@ties.k12.mn.us", password: "password"});
+	}	
+	
     if (Organizations.find().count() === 0) {
         var org1 = Organizations.insert({name: "Demo Organization"});
 		var org2 = Organizations.insert({name: "Test Organization"});
@@ -13,7 +17,7 @@ Meteor.startup(function(){
         var site1 = Sites.insert({ orgid: org1, name: "Site 1"});
 		var site2 = Sites.insert({ orgid: org1, name: "Site 2"});
 		var site3 = Sites.insert({ orgid: org1, name: "Site 3"});
-		var site3 = Sites.insert({ orgid: org2, name: "Site 4"})
+		var site4 = Sites.insert({ orgid: org2, name: "Site 4"})
     }
 
     if (Courses.find().count() === 0) {
@@ -24,6 +28,7 @@ Meteor.startup(function(){
 		Courses.insert({orgid: org1 , siteid: site1, name: "Physical Education"});
 		Courses.insert({orgid: org1 , siteid: site3, name: "Physical Education"});
 		Courses.insert({orgid: org1 , siteid: site3, name: "English 101"});
+		Courses.insert({orgid: org2 , siteid: site4, name: "Basketweaving"}); 
     }
 	
 });
