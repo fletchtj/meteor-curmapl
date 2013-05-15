@@ -118,3 +118,7 @@ body {background:#efefef; padding-top:60px;}
 
 table.dataTable td {padding:8px 10px;}
 table.table thead .sorting, table.table thead .sorting_asc, table.table thead .sorting_desc {background-color:#f5f5f5;}
+table tr.course, table tr.site {cursor:pointer;}
+table tr.selected > td,
+.table-striped tbody > tr.selected:nth-child(odd) > td {background:#ADBBFF;color:#023657;}
+table tr.selected a {color:#024670;}

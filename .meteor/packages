@@ -9,4 +9,4 @@ bootstrap
 font-awesome
 accounts-ui
 accounts-password
-datatables
+paginator

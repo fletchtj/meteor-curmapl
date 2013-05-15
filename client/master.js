@@ -8,50 +8,88 @@ Deps.autorun(function() {
 	Meteor.subscribe("sites", Session.get("orgId"));
 	//always get courses
 	Meteor.subscribe("courses", Session.get("orgId"));
+
+	Meteor.subHandle = Meteor.subscribe("maps", Session.get("pagingSkip"), Session.get("pagingLimit"));
 	
 });
 
 
 Template.home.helpers({
-	clickCount: function() {
-		return Session.get('clickCount');
+	orgName: function() {
+		var org = Organizations.findOne({_id: Session.get("orgId")});
+		return org && org.name || "Unknown";
 	}
-	
-	, myMaps: function() {
-		var maps = [];
-		for(var i = 0; i < 20; i++){
-			maps.push({ name: i+" English 101", owner: "Mr. Harvey", lastMod: "Aug 1, 2012" });
-			maps.push({ name: i+" Physical Education", owner: "Mrs. Shoe", lastMod: "Aug 15, 2012" });
-			maps.push({ name: i+" Chemistry II", owner: "Mrs. Catz", lastMod: "Aug 4, 2012" });
-		}
-		return maps;
+});
+
+Template.sitesTable.helpers({
+	orgSites: function() {
+		return Sites.find({}, {sort: {name: 1}}).fetch();
+	}
+	, siteSelected: function() {
+		return Session.equals("selectedSite", this._id) ? "selected" : '';
+	}
+});
+Template.sitesTable.events({
+	"click .site": function(e) {
+		e.preventDefault();
+		Session.set('selectedSite', this._id);
+		Session.set('selectedCourse','');
+	}
+});
+
+Template.coursesTable.helpers({
+	siteName: function() {
+		var site = Sites.findOne({_id: Session.get("selectedSite")});
+		return site && site.name || "Unknown";
 	}
 	, orgCourses: function() {
-		return Courses.find({}).fetch();
+		var courses = Courses.find({ siteid: Session.get('selectedSite') }, { sort: {name: 1} }).fetch();
+		return courses;
 	}
-	, orgName: function() {
-		var org = Organizations.findOne({_id: Session.get("orgId")});
-		if (org && org.name.length > 0)
-			return org.name;
-			else
-			return "Unknown";
+	, courseSelected: function() {
+		return Session.equals("selectedCourse", this._id) ? "selected" : '';
+	}
+});
+Template.coursesTable.events({
+	"click .course": function(e) {
+		e.preventDefault();
+		Session.set('selectedCourse', this._id);
 	}
 });
 
-Template.home.rendered = function() {
-	$('#example').dataTable({
-	    "sDom": "<'row-fluid'<'span5'l><'span7'f>r>t<'row-fluid'<'span6'i><'span6'p>>"
-	    , "sPaginationType": "bootstrap"
-	    , "oLanguage": {
-	        "sLengthMenu": "_MENU_ items per page"
-	    }
+Template.exampleTable.myMaps = function() {
+	return Maps.find();
+};
+
+Template.home.created = function() {
+	var _pager = new Meteor.Paginator({
+		templates: {
+			content: "exampleTable"
+		}
+		, pagination: {
+			resultsPerPage: 6 //default limit
+		}
+		, callbacks: {
+			onPagingCompleted: function(skip, limit) {
+				Session.set('pagingSkip', skip);
+				Session.set('pagingLimit', limit);
+			}
+			, getDependentSubscriptionsHandles: function() {
+				return [Meteor.subHandle];
+			}
+			, getTotalRecords: function(cb) {
+				Meteor.call("totalCount", function(err, result) {
+					cb(result);
+				});
+			}
+			, onTemplateCreated: function() {
+				Session.set("pagingSkip", 0);
+				Session.set("pagingLimit", 6);
+			}
+		}
 	});
+};
+
+Template.home.destroyed = function() {
+	delete _pager;
 }
-
-
-Template.map.helpers({
-	mapNumber: function(){
-		return Session.get('currentMap');
-	}
-});
-

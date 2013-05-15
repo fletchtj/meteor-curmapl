@@ -6,6 +6,6 @@
   "packages": {
     "router": {},
     "font-awesome": {},
-    "datatables": {}
+    "paginator": {}
   }
 }
