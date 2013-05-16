@@ -8,7 +8,7 @@ Deps.autorun(function() {
 	Meteor.subscribe("sites", Session.get("orgId"));
 	//always get courses
 	Meteor.subscribe("courses", Session.get("orgId"));
-
+	
 	Meteor.subHandle = Meteor.subscribe("maps", Session.get("pagingSkip"), Session.get("pagingLimit"));
 	
 });

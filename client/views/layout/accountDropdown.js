@@ -2,6 +2,7 @@ var loginHandler = function(err) {
 	if(err){
 		$("#errMessage").html(err.reason).fadeIn();
 	} else {
+		Session.set("orgId", Organizations.findOne({name:"Demo Organization"})._id);
 		return true;
 	}
 }
@@ -71,6 +72,9 @@ Template.accountLoggedIn.events({
 				console.log(err);
 			} else {
 				console.log("you've been logged out...");
+				Session.set('orgId',null);
+				Session.set('selectedSite',null);
+				Session.set('selectedCourse',null);
 			}
 		})
 	}

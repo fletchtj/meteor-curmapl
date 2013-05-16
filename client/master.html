@@ -13,20 +13,28 @@
 </body>
 
 <template name="home">
+	{{#if currentUser}}
+		{{>homeLoggedIn}}
+	{{else}}
+		{{>landing}}
+	{{/if}}
+</template>
+
+<template name="homeLoggedIn">
 	<div class="row">
 		<div class="span3">
 			<div class="well sidenav affix">
               <ul class="nav nav-list">
                 <li class="nav-header">Consensus Maps</li>
-                <li><a href="javascript:"><i class="icon-angle-right"></i>Home</a></li>
-                <li><a href="/maps/red"><i class="icon-angle-right"></i>Red Map</a></li>
-                <li><a href="/maps/1"><i class="icon-angle-right"></i>Map 1</a></li>
+                <li><a href="{{homeUrl}}"><i class="icon-angle-right"></i>Home</a></li>
+                <li><a href="/going/to/unknown/path"><i class="icon-angle-right"></i>Red Map</a></li>
+                <li><a href="{{showMapUrl 1}}"><i class="icon-angle-right"></i>Map 1</a></li>
 				{{#if currentUser}}
 				<li class="nav-header">Diary Maps</li>
-				<li><a href="/maps/2"><i class="icon-angle-right"></i>Map 2</a></li>
+				<li><a href="{{showMapPath 2}}"><i class="icon-angle-right"></i>Map 2</a></li>
 				{{/if}}
                 <li class="divider"></li>
-                <li><a href="javascript:"><i class="icon-angle-right"></i>Help</a></li>
+                <li><a href="{{helpUrl}}"><i class="icon-angle-right"></i>Help</a></li>
               </ul>
             </div>
 		</div>
@@ -39,10 +47,6 @@
 			<div class="clearfix" >
 				{{> pagination_buttons }}
 			</div>
-			<div style="margin-top:20px;">
-				<h3>Some instructions...</h3>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eleifend tortor vitae enim dapibus pulvinar. Donec ante nisi, mattis nec porta vel, aliquam sagittis odio. Nunc tincidunt sapien quis metus euismod pharetra. Sed in velit in tortor dignissim imperdiet. Quisque ut pretium orci. Fusce lacus nibh, commodo sit amet auctor nec, adipiscing sed augue. Donec placerat facilisis turpis sed porttitor. Phasellus sit amet massa aliquet tellus semper euismod quis in eros. Nullam vitae elit lorem, et ultricies quam. Praesent eget nisi diam, et ornare orci. Duis ultricies commodo consectetur. Nunc pharetra metus non lorem cursus et tristique dui luctus. Mauris auctor suscipit mollis. Fusce facilisis vestibulum ante, nec feugiat mauris convallis facilisis.</p>
-				<p>Proin eu libero gravida erat rhoncus tempus. Nunc ac lorem odio. Vivamus nunc lorem, mollis vitae viverra vitae, pretium ultrices nunc. Nunc vel commodo massa. Integer rhoncus elit sed diam iaculis ac ullamcorper lectus rhoncus. Vestibulum pretium nibh vel odio adipiscing convallis. Ut tincidunt, urna eu tincidunt interdum, lorem ante pretium nunc, quis luctus justo eros non felis. Mauris posuere ultrices nulla quis egestas. Sed eget libero eget nisl consequat gravida id congue felis. Vestibulum id nunc ut dui pharetra feugiat quis id tellus. Phasellus urna lacus, aliquet nec rutrum non, mollis a risus. Fusce semper porta massa, quis pretium lectus molestie eget. Sed nec lacus in turpis pretium convallis vitae sit amet tortor.</p>
 			</div>
 		</div>
 	</div>
@@ -57,7 +61,7 @@
 		</thead>
 		<tbody>
 			{{#each orgSites}}
-			<tr class="site gradeA {{siteSelected}}">
+			<tr class="site {{siteSelected}}">
 				<td><a href="javascript:">{{this.name}}</td>
 			</tr>
 			{{/each}}
@@ -73,11 +77,15 @@
 			</tr>
 		</thead>
 		<tbody>
-			{{#each orgCourses}}
-			<tr class="course gradeA {{courseSelected}}">
-				<td><a href="javascript:">{{this.name}}</td>
-			</tr>
-			{{/each}}
+			{{#if orgCourses}}
+				{{#each orgCourses}}
+					<tr class="course {{courseSelected}}">
+						<td><a href="javascript:">{{name}}</td>
+					</tr>
+				{{/each}}
+			{{else}}
+				<tr><td>There are no courses for the selected site.</td></tr>
+			{{/if}}
 		</tbody>
 	</table>
 </template>
@@ -94,7 +102,7 @@
 		</thead>
 		<tbody>
 			{{#each myMaps}}
-			<tr class="gradeA">
+			<tr class="map">
 				<td><a href="/maps/10">{{name}}</td>
 				<td>{{owner}}</td>
 				<td>{{lastMod}}</td>
@@ -102,6 +110,22 @@
 			{{/each}}
 		</tbody>
 	</table>
+</template>
+
+<template name="landing">
+	<div class="row">
+		<div class="span3" style="margin-bottom:20px;">
+			<a href="{{mapListUrl}}" class="btn btn-block btn-large btn-primary">Take me to the maps!</a>
+		</div>
+		<div class="span8 offset1">
+			<p>Curriculum Mapping is a procedure for reviewing the operational curriculum as it is entered into an electronic database at any education setting. It is based largely on the work of Heidi Hayes Jacobs in Mapping the Big Picture: Integrating Curriculum and Assessment K-12 (ASCD, 1997) and Getting Results with Curriculum Mapping (2004, ASCD). Schools are using curriculum templates that display key components of the curriculum: content, skills, assessments, and essential questions.</p>
+			<p>Some states such as South Dakota have adopted Curriculum Mapping on a state-wide basis and provide detailed online Curriculum Mapping Resources for their professional staff. Other states such as Indiana have mandated Curriculum Mapping as a tool for schools which do not meet Annual Yearly Progress and also provide numerous online tools.</p>
+			<p>Key to the approach is that each teacher enters what is actually taught in real-time during the school year, in contrast to having an outside or separate committee determine decisions. The entries by teachers are not left alone, however; in fact, because the work is displayed via internet-based programs, it is open to view by all personnel in a school or district. This allows educators to view both K-12 and across grade levels and subjects what is transpiring in order to be informed and to revise their work.</p>
+			<p>The curriculum mapping model as originally defined by Dr. Jacobs has seven specific steps that schools use to thoroughly examine and then revise their curriculum. There are both commercial companies and not-for-profit groups that have generated curriculum mapping software used around the world. Related to mapping, but separate from it, is the concept of a curriculum audit, described by Fenwick W. English. in "Deciding What to Teach and Test: Developing, Auditing, and Aligning the Curriculum" (1999, Sage).
+			Curriculum mapping is not limited to United States public schools. A number of independent schools have adopted the curriculum mapping process to review and revise their curriculum. The bulk of schools using curriculum mapping outside the US tend to be independent schools that follow an international curriculum (such as IB, AERO, or IGCSE) or public schools located in Anglo-Saxon countries.</p>
+			<p>Curriculum mapping requires a cultural shift in certain schools. The curriculum needs to be perceived as a 'work-in-progress', a 'living and breathing' document, whose ultimate owners are students. Curriculum mapping is a 'process', not a one-time initiative. Traditional curriculum mapping software are just tools available to make the review process easier. Modern software allow educators to impute lessons and extract maps. This makes for a more natural process and more frequent updates.</p>
+		</div>
+	</div>
 </template>
 
 <template name="signin">
@@ -113,3 +137,12 @@
 		<p class="text-center" style="color:#888;"><i class="icon-spinner icon-spin icon-4x"></i><br/>Loading....Please Wait</span></p>
 	</div>
 </template>
+
+
+<template name="notFound">
+	<div class="well" style="text-align:center;">
+		<h1 style="margin-bottom: 50px;font-size:4.5em;">Whoa, pardner!</h1> 
+		<h3>There's nothing but empty space around here.</h3>
+		<p>We reckon' you'll be wantin' to head back to the <a href="{{homeUrl}}">homepage</a> soon.</p>
+	</div>
+</template> 
